@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>优点达资讯-分享那些新鲜事</title>
+    <link rel='stylesheet' href='static/css/style.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="./static/fonts/css/font-awesome.min.css">
+    <script type='text/javascript' src='static/js/jquery.js'></script>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!--[if lt IE 9]><script src="static/js/html5.js"></script><![endif]-->
+  </head>
+  <body class="user blog search_not m-home-most ui-navtop">
+    
+    <!-- 头部开始 -->
+    <header class="header">
+      <div class="container">
+        <h1 class="logo">
+          <a href="index.html" title="优点达资讯-分享那些新鲜事">
+            <img src="static/images/logo.png" alt="优点达资讯">优点达资讯
+          </a>
+        </h1>
+        <ul class="nav">
+          <li class="navmore"></li>
+          <li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item current_page_item">
+            <a title="" href="index.html"><span class="fa fa-home"></span>趣·首页</a>
+          </li>
+          <li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="list.html"><span
+                class="fa fa-bullhorn"></span>奇·趣事</a></li>
+          <li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="list.html"><span
+                class="fa fa-bullhorn"></span>奇·趣事</a></li>
+          <li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="list.html"><span
+                class="fa fa-bullhorn"></span>奇·趣事</a></li>
+        </ul>
+        <div class="slinks">
+          <a href="login.html"><i class="fa fa-hand-o-right"></i>&nbsp;登录</a> |
+          <a href="reg.html"><i class="fa fa-registered"></i>&nbsp;注册</a>
+          <!-- <a href="user.html"><i class="fa fa-user"></i>&nbsp;用户中心</a> -->
+        </div>
+        <!-- 移动端兼容 -->
+        <a href="login.html" class="user"><i class="fa fa-user"></i></a>
+        <!-- 点击该图标的时候判断是否登录了，决定是否进入用户中心，否则进入登录页 -->
+      </div>
+    </header>
+    <!-- 头部结束 -->
+
+    <!-- 主体内容 -->
+    
+    <section class="container">
+      <div class="user-box">
+        <div class="lt">
+          <h3>用户中心</h3>
+          <ul class="list-group">
+            <li class="list-group-item"> <a href="user.html"><i class="fa fa-home"></i> 我的首页</a></li>
+            <li class="list-group-item"> <a href="user-collect.html"><i class="fa fa-heart"></i> 我的收藏</a></li>
+            <li class="list-group-item"> <a  class="active"  href="user-add.html"><i class="fa fa-plus"></i> 发布文章</a></li>
+            <li class="list-group-item"> <a href="user-zan.html"><i class="fa fa-thumbs-up"></i> 我的点赞</a></li>
+            <li class="list-group-item"> <a href="user-list.html"><i class="fa fa-tasks"></i> 我的文章</a></li>
+          </ul>
+        </div>
+        <div class="rt">
+       
+          <!-- 发布文章 -->
+          <div class="add-article">
+            <div class="user-location">
+              <a href="user.html"><i class="fa fa-home"></i>用户中心 </a> &gt;
+              <span>发布文章</span>
+            </div>
+            <div class="article-form">
+              <div class="form-input col-12">
+                <span>文章标题：</span>
+                <input type="text" class="text" placeholder="请输入标题">
+              </div>
+              <div class="form-input  col-12">
+                <span>文章分类：</span>
+                <select >
+                  <option value="分类1">分类1</option>
+                  <option value="分类2">分类2</option>
+                  <option value="分类3">分类3</option>
+                  <option value="分类4">分类4</option>
+                </select>
+              </div>
+              <div class="form-input  col-24">
+                <span>文章标签：</span>
+                <div>
+                  <label><input type="checkbox" />标签1</label>
+                  <label><input type="checkbox" />标签1</label>
+                  <label><input type="checkbox" />标签1</label>
+                  <label><input type="checkbox"/>标签1</label>
+                  <label><input type="checkbox" />标签1</label>
+                </div>
+              </div>
+              <div class="form-input  col-12">
+                <span>上传图片：</span>
+                <div>
+                   <button class="btn btn-sm btn-success"><i class="fa fa-cloud-upload"></i>&nbsp;&nbsp;上传图片</button>
+                  <input style="visibility: hidden;" hidden="hidden" type="file">
+                </div>
+              </div>
+              <div class="form-input  col-12">
+                <span>文章缩略图：</span>
+                <img src="./static/images/default.png" alt="">
+              </div>
+              <div class="form-input  col-24" style="height: 200px;">
+                <span>文章正文：</span>
+                <input type="textarea"  rows="5" cols="5" class="context" placeholder="请输入正文">
+              </div>
+              <div class="btn-box">
+                 <button class="btn  btn-success"   type="button"> <i class="fa fa-plus" ></i> 发布</button>
+                 <button class="btn btn-primary"  type="button"> <i class="fa fa-floppy-o" ></i> 存草稿</button>
+                 <button class="btn btn-warning"  type="button"> <i class="fa fa-arrow-circle-left" ></i> 取消</button>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </section>
+    <!-- 主体结束 -->
+
+    <!-- 页脚开始 -->
+    <footer class="footer">
+      <div class="link">
+        友情链接：
+        <a href="" title="百度">百度</a> <span>|</span>
+        <a href="" title="百度">百度</a> <span>|</span>
+        <a href="" title="百度">百度</a> <span>|</span>
+        <a href="" title="百度">百度</a> <span>|</span>
+        <a href="" title="百度">百度</a> <span>|</span>
+        <a href="" title="百度">百度</a> <span>|</span>
+        <a href="" title="百度">百度</a> <span>|</span>
+        <a href="" title="百度">百度</a> <span>|</span>
+        <a href="" title="百度">百度</a>
+      </div>
+      <p>&copy; 2021 <a href="http://blog.weknow.cn">优点达资讯,</a>
+        &nbsp;&nbsp;联系邮箱：xxxx@163.com
+        &nbsp;&nbsp; <a href="">备案号信息</a>
+      </p>
+    </footer>
+    <!-- 页脚结束 -->
+
+  </body>
+</html>
