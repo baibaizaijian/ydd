@@ -61,15 +61,15 @@
           <h3>注册账号</h3>
           <div class="ipt">
             <i class="fa fa-user"></i>
-            <input placeholder="请输入手机号" type="text" />
+            <input placeholder="请输入手机号" type="text" name="mobile" />
           </div>
           <div class="ipt">
             <i class="fa fa-lock"></i>
-            <input placeholder="请输入密码" type="password" />
+            <input placeholder="请输入密码" type="password" name="password" />
           </div>
           <div class="ipt">
             <i class="fa fa-lock"></i>
-            <input placeholder="请输入确认密码" type="password" />
+            <input placeholder="请输入确认密码" type="password" name="password-copy" />
           </div>
           <div class="btn btn-block btn-primary">立即注册</div>
           <div class="tips">
@@ -105,6 +105,38 @@
     </p>
   </footer>
   <!-- 页脚结束 -->
+  <script src="./static/js/axios.js"></script>
+  <script src="./static/js/common.js"></script>
+  <script>
+    // 获取元素
+    const mobile = document.querySelector('[name=mobile]')
+    const password = document.querySelector('[name=password]')
+    const passwordCopy = document.querySelector('[name=password-copy]')
+    const btn = document.querySelector('.btn-block')
+    // 点击注册
+    btn.addEventListener('click', function () {
+
+      axios({
+
+        url: '/index/reg',
+        method: 'post',
+        data: {
+          mobile: mobile.value,
+          password: password.value
+
+        }
+
+      }).then((result) => {
+        console.log(result);
+
+      }).catch((err) => {
+
+      });
+    })
+
+
+
+  </script>
 
 
 
