@@ -31,54 +31,40 @@
       <hr class="hr15">
       <input name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input">
       <hr class="hr15">
-      <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+      <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit" class="add">
       <hr class="hr20">
     </form>
-
   </div>
-  <script src="../bootstrap/bootstrap.min.js"></script>
-  <script src="./lib/form-serialize.js"></script>
+
   <script src="./lib/axios.js"></script>
+  <script src="./js/common.js"></script>
+
   <script>
-    // 获取元素
-    const username = document.querySelector('[name=username]')
-    const password = document.querySelector('[name=password]')
-    const submit = document.querySelector('[type=submit]')
+    const add = document.querySelector('[type=submit]')
 
-    submit.addEventListener('click', function (e) {
 
-      // 清除默认行为
-      e.preventDefault();
+
+    add.addEventListener('click', e => {
+      e.preventDefault()
+      const username = document.querySelector('[name=username]').value
+      const password = document.querySelector('[name=password]').value
 
       axios({
-
-        url: 'http://ajax-api.itheima.net/login',
+        url: '/index/login',
         method: 'post',
         data: {
-          username: username.value,
-          password: password.value
-
+          login_name: username,
+          password: password
         }
-      }).then((result) => {
-        console.log(result);
-        alert(result.data.message)
+      }).then(res => {
+        console.log(res);
+        alert('点击跳转主页')
+        localStorage.setItem('token', res.data.token)
         setTimeout(() => {
           location.href = './index.html'
-        }, 1000);
-
-
-
-      }).catch((err) => {
-        console.dir(err);
-        alert(err.response.data.message)
-
+        }, 1000)
       })
-
-
     })
-
 
   </script>
 </body>
-
-</html>
