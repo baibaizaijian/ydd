@@ -40,6 +40,7 @@
   <script src="./js/common.js"></script>
 
   <script>
+    if (localStorage.getItem('token')) location.href = './index.html'
     const add = document.querySelector('[type=submit]')
 
 

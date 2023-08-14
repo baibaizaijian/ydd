@@ -44,7 +44,7 @@
 						<a href="lock.html">锁屏</a>
 					</dd>
 					<dd>
-						<a href="./login.html">退出</a>
+						<a id="logout" href="./login.html">退出</a>
 					</dd>
 				</dl>
 			</li>
@@ -147,6 +147,12 @@
 	<!-- 右侧主体结束 -->
 	<!-- 中部结束 -->
 	<script>
+		// token判断
+		if (!localStorage.getItem('token')) location.href = './login.html'
+		// 退出登录
+		document.querySelector('#logout').addEventListener('click', () => localStorage.clear())
+
+
 		const logo = document.querySelector('.logo a')
 		axios({
 			url: "index/getConfig"
