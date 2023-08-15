@@ -10,27 +10,62 @@
     content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
   <link rel="stylesheet" href="./css/font.css">
   <link rel="stylesheet" href="./css/xadmin.css">
+  <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
   <script src="./lib/layui/layui.js" charset="utf-8"></script>
   <script type="text/javascript" src="./js/xadmin.js"></script>
+  <script src="../bootstrap/bootstrap.min.js"> </script>
 
   <style>
     * {
       box-sizing: border-box;
     }
 
-    .box {
+    .main {
       display: flex;
       justify-content: space-between;
-      background-color: pink;
+
       width: 100%;
-      height: 100px;
+      height: 90px;
     }
 
-    .box div {
-      width: 20%;
-      height: 75px;
-      background-color: green;
+
+
+
+    .main div {
+      margin: 0 15px;
+      height: 90px;
+      text-align: center;
+      font-size: 20px;
       border-radius: 5px;
+    }
+
+    .admin {
+      background-color: #fb6d49;
+    }
+
+    .total {
+      background-color: #67c23a;
+    }
+
+    .article {
+      background-color: #e6a23c;
+    }
+
+    .advpos {
+      background-color: #3a7ce7;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    table td {
+      max-width: 20em;
+      font-size: 16px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
     }
 
     .box1 {
@@ -43,6 +78,7 @@
 
     .box1 div {
       width: 30%;
+
       height: 380px;
       background-color: beige;
     }
@@ -69,30 +105,68 @@
       <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
   </div>
   <div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
+    <div class=" main layui-row  ">
+      <div class="admin layui-col-xs3">
+        <i class="layui-icon layui-icon-username " style="font-size: 50px;"></i>
 
-      <div class="box">
-        <div class="one">1</div>
-        <div class="two">2</div>
-        <div class="three">3</div>
-        <div class="four">4</div>
+        <span></span>
       </div>
-      <div class="box1">
-        <div>
-          <ul class="newUser">
-
-          </ul>
-        </div>
-        <div>
-          <ul class="articleList">
-
-          </ul>
-        </div>
-        <div id="salary">3</div>
+      <div class=" total layui-col-xs3">
+        <i class="layui-icon layui-icon-user " style="font-size: 50px;"></i>
+        <span></span>
       </div>
-
+      <div class="article layui-col-xs3">
+        <i class="layui-icon layui-icon-list " style="font-size: 50px;"></i>
+        <span></span>
+      </div>
+      <div class="advpos layui-col-xs3">
+        <i class="layui-icon layui-icon-chart-screen " style="font-size: 50px;"></i>
+        <span></span>
+      </div>
     </div>
-    <div class="box2"></div>
+
+  </div>
+  <div class="layui-row layui-col-space15">
+    <div class="box1">
+      <div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">最新注册用户</th>
+            </tr>
+          </thead>
+          <tbody class="newUser">
+            <tr>
+              <td>Mark</td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+
+      <div>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">最新新闻</th>
+            </tr>
+          </thead>
+          <tbody class="articleList">
+            <tr>
+              <td>Mark</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="salary"></div>
+    </div>
+
+  </div>
+
+  </div>
+  <div class="box2"></div>
   </div>
   <script src="./js/axios.js"></script>
   <script src="./js/common.js"></script>
@@ -102,14 +176,18 @@
       url: "/index/baseInfo"
     }).then((result) => {
       console.log(result)
-      const one = document.querySelector('.one').innerHTML = `管理员用户${result.data.admin_num} 名`
-      const two = document.querySelector('.two').innerHTML = ` 平台注册用户 ${result.data.user.total} 名`
-      const three = document.querySelector('.three').innerHTML = `平台文章总数${result.data.article_num} 名`
-      const four = document.querySelector('.four').innerHTML = `广告位 ${result.data.advpos_num}个,广告图 ${result.data.advimg_num}张`
+      const one = document.querySelector('.admin span').innerHTML = `管理员用户${result.data.admin_num} 名`
+      const two = document.querySelector('.total span').innerHTML = ` 平台注册用户 ${result.data.user.total} 名`
+      const three = document.querySelector('.article span').innerHTML = `平台文章总数${result.data.article_num} 名`
+      const four = document.querySelector('.advpos span').innerHTML = `广告位 ${result.data.advpos_num}个,广告图 ${result.data.advimg_num}张`
       const newUser = document.querySelector('.newUser').innerHTML = result.data.new_user.map(ele => `
-      <li>${ele.username}${ele.sex ? '女' : '男'}</li>`)
-      const articleList = document.querySelector('.articleList').innerHTML = result.data.hot_article.map(e => `
-      <li>${e.title}</li>`)
+      <tr><td>${ele.username}${ele.sex ? '女' : '男'}</td></tr>
+     `).join('')
+      document.querySelector('.articleList').innerHTML = result.data.hot_article.map(e => `
+      <tr><td>${e.title}</td>
+            </tr>`).join('')
+
+
       setPie(result.data.user)
       fn(result.data.all_cate)
 

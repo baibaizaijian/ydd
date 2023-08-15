@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Layui 弹出框表单</title>
+  <link rel="stylesheet" href="./lib/layui/css/layui.css">
+
+</head>
+
+<body>
+
+  <button class="layui-btn">添加学员</button>
+
+  <script src="./lib/layui/layui.js"></script>
+  <script>
+    layui.use(['layer', 'form'], function () {
+      let layer = layui.layer;
+      let form = layui.form;
+      const btn = document.querySelector('.layui-btn').addEventListener('click', e => {
+        openForm()
+      })
+      // 打开弹出框表单
+      function openForm() {
+        layer.open({
+          type: 1,
+          title: '表单',
+          area: ['500px', '300px'],
+          content: `<form class="layui-form " action="">
+        <div class="layui-form-item">
+          <label class="layui-form-label">分类名</label>
+          <div class="layui-input-block">
+            <input type="text" name="catename" required lay-verify="required" placeholder="请输入分类名" autocomplete="off"
+              class="layui-input" style="width: 200px;">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">分类总数</label>
+          <div class="layui-input-inline">
+            <input type="password" name="sort_num" required lay-verify="required" placeholder="请输入分类总数"
+              autocomplete="off" class="layui-input" style="width: 200px;">
+          </div>
+
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">icon</label>
+          <div class="layui-input-block">
+            <input type="text" name="icon" required lay-verify="required" placeholder="请输入图标" autocomplete="off"
+              class="layui-input" style="width: 200px;">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>`
+
+        });
+
+
+        // 监听表单提交
+        form.on('submit', function (data) {
+          console.log(data.field);  // 在控制台输出表单数据，供您测试使用
+          layer.closeAll();  // 关闭弹出框
+          return false;  // 阻止表单默认提交行为
+        });
+      }
+    })
+  </script>
+</body>
+
+</html>

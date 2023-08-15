@@ -40,7 +40,7 @@
   <script src="./js/common.js"></script>
 
   <script>
-    if (localStorage.getItem('token')) location.href = './index.html'
+    if (localStorage.getItem('ydd-token')) location.href = './index.html'
     const add = document.querySelector('[type=submit]')
 
 
@@ -60,7 +60,7 @@
       }).then(res => {
         console.log(res);
         alert('点击跳转主页')
-        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('ydd-token', res.data.token)
         setTimeout(() => {
           location.href = './index.html'
         }, 1000)
