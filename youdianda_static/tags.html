@@ -1,37 +1,196 @@
 <!DOCTYPE html>
 <html class="x-admin-sm">
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" href="./css/font.css">
-        <link rel="stylesheet" href="./css/xadmin.css">
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/xadmin.js"></script>
-        <!--[if lt IE 9]>
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+  <link rel="stylesheet" href="./css/font.css">
+  <link rel="stylesheet" href="./css/xadmin.css">
+  <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+  <script src="./lib/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="./js/xadmin.js"></script>
+  <script src="../bootstrap/bootstrap.min.js"></script>
+  <style>
+    .alter {
+      display: flex;
+      justify-content: space-around
+    }
+
+    .body {
+      font-size: 18px;
+    }
+
+    .table tr {
+      height: 40px;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .add {
+      display: flex;
+      justify-content: space-around
+    }
+  </style>
+
+  <!--[if lt IE 9]>
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
           <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-    </head>
-    <body>
-        <div class="x-nav">
-          <span class="layui-breadcrumb">
-            <a href="">首页</a>
-            <a href="">演示</a>
-            <a>
-              <cite>导航元素</cite></a>
-          </span>
-          <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-            <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
+</head>
+
+<body>
+  <div class="x-nav">
+    <span class="layui-breadcrumb">
+      <a href="">首页</a>
+      <a href="">演示</a>
+      <a>
+        <cite>导航元素</cite></a>
+    </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+      onclick="location.reload()" title="刷新">
+      <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
+  </div>
+
+  <!-- <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      这是标签列表、修改、删除、增加
+    </div>
+  </div> -->
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid header">
+      <h1>学员管理</h1>
+      <!-- 添加学生信息按钮 -->
+
+    </div>
+  </nav>
+  <div class="add">
+    <input type="text" class="form-control" placeholder="搜索标签" aria-label="Search in website" style="width:200px">
+    <button type="button" class="btn btn-primary btn-lg  newadd">添加学员</button>
+  </div>
+
+  <!-- table-striped隔行换色 -->
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th style="width: 10%;">#</th>
+        <th style="width: 20%;">ID</th>
+        <th style="width: 40%;">标签名称</th>
+        <th style="width: 30%;">操作</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td class="alter">
+          <button type="button" class="btn btn-primary">修改</button>
+          <button type="button" class="btn btn-danger">删除</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">添加标签</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="layui-fluid">
-            <div class="layui-row layui-col-space15">
-               这是标签列表、修改、删除、增加
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label ">标签名称 :</label>
+              <input type="text" class="form-control tagname " id="recipient-name ">
             </div>
-        </div> 
-    </body>
-    <script>
-    </script>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary submit">提交</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+
+<script src="./js/axios.js"></script>
+<script src="./js/toasts.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/form-serialize.js"></script>
+
+<script>
+  const tbody = document.querySelector('tbody')
+  console.log(tbody);
+  function render() {
+    axios({
+      url: '/ydd_tag/all'
+
+    }).then((result) => {
+      console.log(result);
+      tbody.innerHTML = result.data.map((e, index) => `
+    <tr>
+        <th scope="row">${index}</th>
+        <td>${e.id}</td>
+        <td>${e.tagname}</td>
+        <td class="alter">
+          <button type="button" class="btn btn-primary btn-lg" data-id=${e.id}>修改</button>
+          <button type="button" class="btn btn-danger btn-lg" data-id=${e.id}>删除</button>
+        </td>
+      </tr>
+    `).join('')
+    }).catch((err) => {
+    })
+
+  }
+  render()//渲染函数
+  // 设置模态框
+  const modal = new bootstrap.Modal('#exampleModal', {
+    keyboard: false, // 按下 esc 不关闭
+    backdrop: 'static' // 点击遮罩层不关闭
+  })
+
+  const submit = document.querySelector('.submit')
+  const tagname = document.querySelector('.tagname')
+  console.log(tagname);
+  // 添加业务
+  const Add = document.querySelector('.newadd').addEventListener('click', e => {
+    console.log('我要添加');
+    modal.show()
+  })
+  // 删除业务
+  tbody.addEventListener('click', e => {
+
+  })
+
+
+  // 确认提交
+  submit.addEventListener('click', async e => {
+    console.log(tagname.value);
+    axios({
+      url: '/ydd_tag/add',
+      method: "post",
+      data: {
+        tagname: tagname.value
+      }
+    }).then((res) => {
+      console.log(res);
+      render()
+      modal.hide()
+    }).catch((err) => {
+      console.dir(err);
+    })
+
+
+  })
+</script>
+
 </html>
