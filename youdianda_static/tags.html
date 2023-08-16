@@ -129,20 +129,20 @@
 
 <script>
   const tbody = document.querySelector('tbody')
-  console.log(tbody);
+
   function render() {
     axios({
       url: '/ydd_tag/all'
 
     }).then((result) => {
-      console.log(result);
+      // console.log(result);
       tbody.innerHTML = result.data.map((e, index) => `
     <tr>
         <th scope="row">${index}</th>
         <td>${e.id}</td>
         <td>${e.tagname}</td>
         <td class="alter">
-          <button type="button" class="btn btn-primary btn-lg" data-id=${e.id}>修改</button>
+          <button type="button" class="btn btn-primary btn-lg amend" data-id=${e.id}>修改</button>
           <button type="button" class="btn btn-danger btn-lg del" data-id=${e.id}>删除</button>
         </td>
       </tr>
@@ -160,10 +160,13 @@
   let id
   const submit = document.querySelector('.submit')
   const tagname = document.querySelector('.tagname')
-  console.log(tagname);
+  const name = document.querySelector('#exampleModalLabel')
   // 添加业务
   const Add = document.querySelector('.newadd').addEventListener('click', e => {
+
     console.log('我要添加');
+    id = null
+    name.innerHTML = '添加标签'
     modal.show()
   })
   // 删除业务
@@ -180,9 +183,31 @@
       }).then((res) => {
         console.log(res);
         render()
+      }).catch((err) => {
+      });
+
+    }
+  })
+  // 修改业务
+  tbody.addEventListener('click', e => {
+    if (e.target.classList.contains('amend')) {
+      console.log('我要修改');
+      name.innerHTML = '修改标签'
+      id = e.target.dataset.id
+      console.log(id);
+      modal.show()
+
+      axios({
+        url: '/ydd_tag/rowInfo',
+        method: 'post',
+        params: {
+          id
+        }
+      }).then((res) => {
+        tagname.value = res.data.tagname
 
       }).catch((err) => {
-
+        console.dir(err);
       });
 
     }
@@ -192,21 +217,36 @@
   // 确认提交
   submit.addEventListener('click', async e => {
     console.log(tagname.value);
-    axios({
-      url: '/ydd_tag/add',
-      method: "post",
-      data: {
-        tagname: tagname.value
-      }
-    }).then((res) => {
-      console.log(res);
-      render()
-      tagname.value = ''
-      modal.hide()
-    }).catch((err) => {
-      console.dir(err);
-    })
-
+    if (id) {
+      axios({
+        url: '/ydd_tag/update',
+        method: 'post',
+        data: {
+          tagname: tagname.value,
+          id
+        }
+      }).then((res) => {
+        console.log(res);
+        render()
+        modal.hide()
+      }).catch((err) => {
+      })
+    } else {
+      axios({
+        url: '/ydd_tag/add',
+        method: "post",
+        data: {
+          tagname: tagname.value
+        }
+      }).then((res) => {
+        console.log(res);
+        render()
+        tagname.value = ''
+        modal.hide()
+      }).catch((err) => {
+        console.dir(err);
+      })
+    }
 
   })
 </script>
