@@ -69,7 +69,8 @@
     </div>
   </nav>
   <div class="add">
-    <input type="text" class="form-control" placeholder="搜索标签" aria-label="Search in website" style="width:200px">
+    <input type="text" class="form-control search" placeholder="搜索标签" aria-label="Search in website"
+      style="width:200px">
     <button type="button" class="btn btn-primary btn-lg  newadd">添加学员</button>
   </div>
 
@@ -135,7 +136,7 @@
       url: '/ydd_tag/all'
 
     }).then((result) => {
-      // console.log(result);
+      console.log(result);
       tbody.innerHTML = result.data.map((e, index) => `
     <tr>
         <th scope="row">${index}</th>
@@ -249,6 +250,40 @@
     }
 
   })
+
+  // 搜索业务
+  const search = document.querySelector('.search')
+  search.addEventListener("blur", function () {
+    console.log('我在');
+    console.log(search.value);
+    axios({
+      url: '/ydd_tag/all'
+    }).then((result) => {
+      console.log(result);
+
+      // ele.tagname.includes(`${search.value}`)
+      // console.log(result.data);
+      // console.log(result.data.filter((ele) => 2 > 1))
+      // console.log(result.data.map((ele) => typeof ele.tagname));
+      // result.data.filter(ele => ele.tagname.includes(search.value))
+      const arr = result.data.filter(ele => ele.tagname.includes(search.value))
+      console.log(arr);
+      tbody.innerHTML = arr.map((e, index) => `
+      <tr>
+          <th scope="row">${index}</th>
+          <td>${e.id}</td>
+          <td>${e.tagname}</td>
+          <td class="alter">
+            <button type="button" class="btn btn-primary btn-lg amend" data-id=${e.id}>修改</button>
+            <button type="button" class="btn btn-danger btn-lg del" data-id=${e.id}>删除</button>
+          </td>
+        </tr>
+      `).join('')
+
+    }).catch((err) => {
+    })
+  })
+
 </script>
 
 </html>
