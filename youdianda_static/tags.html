@@ -11,9 +11,7 @@
   <link rel="stylesheet" href="./css/font.css">
   <link rel="stylesheet" href="./css/xadmin.css">
   <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-  <script src="./lib/layui/layui.js" charset="utf-8"></script>
-  <script type="text/javascript" src="./js/xadmin.js"></script>
-  <script src="../bootstrap/bootstrap.min.js"></script>
+
   <style>
     .alter {
       display: flex;
@@ -122,6 +120,9 @@
 
 </body>
 
+<script src="./lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/xadmin.js"></script>
+<script src="../bootstrap/bootstrap.min.js"></script>></script>
 
 <script src="./js/axios.js"></script>
 <script src="./js/toasts.js"></script>
@@ -136,7 +137,7 @@
       url: '/ydd_tag/all'
 
     }).then((result) => {
-      console.log(result);
+      // console.log(result);
       tbody.innerHTML = result.data.map((e, index) => `
     <tr>
         <th scope="row">${index}</th>
@@ -165,7 +166,7 @@
   // 添加业务
   const Add = document.querySelector('.newadd').addEventListener('click', e => {
 
-    console.log('我要添加');
+    // console.log('我要添加');
     id = null
     name.innerHTML = '添加标签'
     modal.show()
@@ -174,7 +175,7 @@
 
   tbody.addEventListener('click', e => {
     if (e.target.classList.contains('del')) {
-      console.log('我要删除');
+      // console.log('我要删除');
       id = e.target.dataset.id
       axios({
         url: '/ydd_tag/del',
@@ -183,16 +184,16 @@
         }
       }).then((res) => {
         console.log(res);
+        Toast.info(`${res.errmsg}`)
         render()
-      }).catch((err) => {
-      });
+      })
 
     }
   })
   // 修改业务
   tbody.addEventListener('click', e => {
     if (e.target.classList.contains('amend')) {
-      console.log('我要修改');
+      // console.log('我要修改');
       name.innerHTML = '修改标签'
       id = e.target.dataset.id
       console.log(id);
@@ -206,6 +207,8 @@
         }
       }).then((res) => {
         tagname.value = res.data.tagname
+
+
 
       }).catch((err) => {
         console.dir(err);
@@ -229,6 +232,7 @@
       }).then((res) => {
         console.log(res);
         render()
+        Toast.success('修改成功')
         modal.hide()
       }).catch((err) => {
       })
@@ -241,7 +245,9 @@
         }
       }).then((res) => {
         console.log(res);
+        Toast.success('添加成功')
         render()
+
         tagname.value = ''
         modal.hide()
       }).catch((err) => {

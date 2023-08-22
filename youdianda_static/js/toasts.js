@@ -27,13 +27,13 @@ const Toast = {
         }, 500)
     },
     success(message) {
-        this.toast(message,'success')
+        this.toast(message, 'success')
     },
-    fail(message){
-        this.toast(message,'danger')
+    fail(message) {
+        this.toast(message, 'danger')
     },
-    info(message){
-        this.toast(message,'primary')
+    info(message) {
+        this.toast(message, 'primary')
     }
 }
 
@@ -56,3 +56,10 @@ window.onload = function () {
     `
     document.body.append(div)
 }
+/* 提示框用法
+
+Toast.success('提示信息')
+
+Toast.fail('错误信息')
+
+Toast.info('提示信息') */

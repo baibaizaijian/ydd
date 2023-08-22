@@ -1,0 +1,156 @@
+body {
+    background-color: #eaedf1;
+
+}
+
+.layui-fluid {
+    padding: 20px 5px 10px 20px;
+    /* margin-bottom: 20px; */
+    height: 100%;
+}
+
+.layui-row {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.search {
+    font-size: 16px;
+}
+
+.search input {
+    font-size: 18px;
+    color: #c0c9db;
+    margin-left: 10px;
+    margin-right: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#inp-search {
+    margin-left: 10px;
+}
+
+.search button {
+    width: 70px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.search .btn-search {
+    background-color: #409eff;
+    color: #fff;
+}
+
+.search .controls {
+    margin-top: 14px;
+}
+
+.controls .btn-new {
+    border: 1px solid #409eff;
+    color: #409eff;
+    background-color: #ecf5ff;
+}
+
+.controls .btn-into {
+    border: 1px solid #e8b086;
+    color: #e8b086;
+    background-color: #fdf6ec;
+    margin-left: 10px;
+}
+
+.table-bordered {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.table-bordered tr {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+}
+
+.table-bordered .title {
+    font-weight: 700;
+}
+
+.btn-gai {
+    background-color: #409eff;
+    color: #fff;
+}
+
+.btn-outline-primary {
+    background-color: #ecf5ff;
+}
+
+
+/* 按钮样式 */
+td {
+    position: relative;
+}
+
+.switch {
+    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    /* margin-top: 20px; */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 1px;
+    bottom: 1px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
