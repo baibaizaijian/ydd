@@ -112,6 +112,7 @@
   <script src="./js/axios.js"></script>
   <script src="./js/common.js"></script>
   <script src="./js/form-serialize.js"></script>
+  <script src="./js/toasts.js"></script>
   <script>
     const myForm = document.querySelector('form')
     const tbody = document.querySelector('tbody')
@@ -122,7 +123,7 @@
       axios({
         url: '/ydd_cate/all',
       }).then((res) => {
-        console.log(res)
+        // console.log(res)
         tbody.innerHTML = res.data.map((e, index) => `
         <tr>
         <td>${index + 1}</td>
@@ -131,8 +132,8 @@
         <td>${e.icon}</td>
         <td>${e.sort_num}</td>
         <td class="alter">
-          <button type="button" class="btn btn-primary ">修改</button>
-          <button type="button" class="btn btn-danger ">删除</button>
+          <button type="button" class="btn btn-primary amend" data-id=${e.id}>修改</button>
+          <button type="button" class="btn btn-danger del" data-id=${e.id}>删除</button>
         </td>
       </tr>
    
@@ -193,12 +194,14 @@
 
       })
 
+    let id
     // 删除模块
-    // 事件委托
+
 
     tbody.addEventListener('click', e => {
-      if (e.target.classList.contains('layui-btn-danger')) {
-        const id = e.target.dataset.id
+      console.log(e);
+      if (e.target.classList.contains('del')) {
+        id = e.target.dataset.id
         console.log('我要删除');
         axios({
           url: '/ydd_cate/del',
@@ -208,10 +211,12 @@
         }).then(res => {
           console.log(res);
           render()
-        }).catch((err) => {
-
-        });
-
+          if (res.errmsg === "") {
+            Toast.success('删除成功')
+          } else {
+            Toast.info(`${res.errmsg}`)
+          }
+        })
       }
 
     })
