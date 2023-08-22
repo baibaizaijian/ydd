@@ -150,9 +150,13 @@
       backdrop: 'static' // 点击遮罩层不关闭
     })
     const up = document.querySelector('.up');
-    const sort = document.querySelector('[name=sort_num]');
     const decline = document.querySelector('.decline');
+    const sort = document.querySelector('[name=sort_num]')
 
+    const icon = document.querySelector('[name=icon]')
+    console.log(icon);
+    const catename = document.querySelector('[name=catename]');
+    console.log(catename);
     up.addEventListener('click', function () {
 
 
@@ -169,6 +173,7 @@
     // 2.添加模块
     const title = document.querySelector('#title')
     document.querySelector('.add').addEventListener('click', e => {
+      id = null
       modal.show()
       title.innerHTML = "添加分类"
 
@@ -177,21 +182,34 @@
 
     document.querySelector(".submit").addEventListener
       ('click', e => {
-        console.log('我中文');
         const data = serialize(form, { hash: true, empty: true })
-        console.log(data);
-        // data.sort_num = +data.sort_num
-        axios({
-          url: '/ydd_cate/add',
-          method: 'post',
-          data: data,
-        }).then((result) => {
-          console.log(result);
-          render()
-          form.reset()
-          modal.hide()
-        })
+        if (id) {
+          data.id = id
+          axios({
+            url: '/ydd_cate/update',
+            method: 'post',
+            data
+          }).then(res => {
+            console.log(res);
+            render()
+            modal.hide()
+            Toast.success('修改成功')
 
+          })
+
+        } else {
+          axios({
+            url: '/ydd_cate/add',
+            method: 'post',
+            data: data,
+          }).then((result) => {
+            console.log(result);
+            render()
+            form.reset()
+            modal.hide()
+            Toast.success('添加成功')
+          })
+        }
       })
 
     let id
@@ -199,7 +217,7 @@
 
 
     tbody.addEventListener('click', e => {
-      console.log(e);
+
       if (e.target.classList.contains('del')) {
         id = e.target.dataset.id
         console.log('我要删除');
@@ -216,6 +234,30 @@
           } else {
             Toast.info(`${res.errmsg}`)
           }
+        })
+      }
+
+    })
+    // 修改分类
+    tbody.addEventListener('click', e => {
+
+      if (e.target.classList.contains('amend')) {
+        console.log('我要修改');
+        id = e.target.dataset.id
+        modal.show()
+        title.innerHTML = "修改分类"
+        axios({
+          url: 'ydd_cate/rowInfo',
+          params: {
+            id
+          }
+        }).then((res) => {
+          console.log(res)
+          catename.value = res.data.catename
+          sort.value = res.data.sort_num
+          icon.value = res.data.icon
+
+
         })
       }
 
