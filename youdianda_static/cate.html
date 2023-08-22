@@ -10,12 +10,11 @@
     content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
   <link rel="stylesheet" href="./css/font.css">
   <link rel="stylesheet" href="./css/xadmin.css">
+  <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/cate.css">
   <script src="./lib/layui/layui.js" charset="utf-8"></script>
   <script type="text/javascript" src="./js/xadmin.js"></script>
-  <!--[if lt IE 9]>
-          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+
 </head>
 
 <body>
@@ -26,154 +25,196 @@
       <a>
         <cite>导航元素</cite></a>
     </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+    <a class="layui-btn layui-btn-small" style="line-height: 1.6em;margin-top:3px;float:right"
       onclick="location.reload()" title="刷新">
       <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
   </div>
-  <div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-      <!-- 提交表单 -->
+  <button type="button" class="btn btn-success add">
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <line x1="12" y1="5" x2="12" y2="19">
 
+      </line>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>添加分类</button>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th style="width: 10%;">#</th>
+        <th style="width: 15%;">分类ID</th>
+        <th style="width: 15%;">分类名称</th>
+        <th style="width: 15%;">图标class</th>
+        <th style="width: 15%;">权重</th>
+        <th style="width: 25%;">操作</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr>
+        <th>1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>Otto</td>
+        <td>Otto</td>
+        <td class="alter">
+          <button type="button" class="btn btn-primary ">修改</button>
+          <button type="button" class="btn btn-danger ">删除</button>
+        </td>
+      </tr>
 
-
-      <form class="layui-form " action="">
-        <div class="layui-form-item">
-          <label class="layui-form-label">分类名</label>
-          <div class="layui-input-block">
-            <input type="text" name="catename" required lay-verify="required" placeholder="请输入分类名" autocomplete="off"
-              class="layui-input" style="width: 200px;">
-          </div>
+    </tbody>
+  </table>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="title">添加分类</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="layui-form-item">
-          <label class="layui-form-label">分类总数</label>
-          <div class="layui-input-inline">
-            <input type="password" name="sort_num" required lay-verify="required" placeholder="请输入分类总数"
-              autocomplete="off" class="layui-input" style="width: 200px;">
-          </div>
-
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label ">分类名称 :</label>
+              <input type="text" class="form-control tagname " name="catename">
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label ">图标class :</label>
+              <input type="text" class="form-control tagname " name="icon">
+            </div>
+            <div class="modal-body">
+              <div class="sorts">
+                <span>排序大小:</span>
+                <div class="container1">
+                  <div class=" btn-x decline">-</div>
+                  <input class=" x" type="text" value="1" name="sort_num">
+                  <div class="btn-x up">+</div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="layui-form-item">
-          <label class="layui-form-label">icon</label>
-          <div class="layui-input-block">
-            <input type="text" name="icon" required lay-verify="required" placeholder="请输入图标" autocomplete="off"
-              class="layui-input" style="width: 200px;">
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary submit">提交</button>
         </div>
-        <div class="layui-form-item">
-          <div class="layui-input-block">
-            <button class="layui-btn" lay-filter="formDemo">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-          </div>
-        </div>
-      </form>
-
-
-
-      <table class="layui-table">
-        <colgroup>
-          <col width="150">
-          <col width="200">
-          <col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>名称</th>
-            <th>icon</th>
-            <th>分类总数</th>
-
-            <th>修改</th>
-            <th>删除</th>
-          </tr>
-        </thead>
-        <tbody class="tbody">
-          <!-- <tr>
-            <td>贤心</td>
-            <td>2016-11-29</td>
-            <td>人生就像是一场修行</td>
-          </tr> -->
-
-        </tbody>
-      </table>
-
-
+      </div>
     </div>
   </div>
 
-</body>
-<script src="./js/axios.js"></script>
-<script src="./js/common.js"></script>
-<script src="./js/form-serialize.js"></script>
-<script>
-  const myForm = document.querySelector('form')
-  const tbody = document.querySelector('.tbody')
-  // 1.封装渲染函数
-  function render() {
-    axios({
-      url: '/ydd_cate/all',
-    }).then((res) => {
-      console.log(res)
-      tbody.innerHTML = res.data.map(e => `
-    <tr>
-        <td>${e.id}</td>
+  <form action="">
+
+  </form>
+
+
+
+
+  <script src="../bootstrap/bootstrap.min.js"></script>
+  <script src="./js/axios.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/form-serialize.js"></script>
+  <script>
+    const myForm = document.querySelector('form')
+    const tbody = document.querySelector('tbody')
+    // 1.封装渲染函数
+
+
+    function render() {
+      axios({
+        url: '/ydd_cate/all',
+      }).then((res) => {
+        console.log(res)
+        tbody.innerHTML = res.data.map((e, index) => `
+        <tr>
+        <td>${index + 1}</td>
+        <th>${e.id}</th>
         <td>${e.catename}</td>
         <td>${e.icon}</td>
         <td>${e.sort_num}</td>
-        <td><button class="layui-btn " data-id=${e.id}>修改</button></td>
-        <td><button id="del" class="layui-btn  layui-btn-danger" data-id=${e.id}>删除</button></td>
-        
-          </tr>
+        <td class="alter">
+          <button type="button" class="btn btn-primary ">修改</button>
+          <button type="button" class="btn btn-danger ">删除</button>
+        </td>
+      </tr>
+   
+
     `).join('')
-
-    })
-  }
-
-
-  render()
-  // 表单
-
-
-  // 2.添加模块
-  const form = document.querySelector('form')
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-    console.log('我中文');
-    const data = serialize(form, { hash: true, empty: true })
-    data.sort_num = +data.sort_num
-    axios({
-      url: '/ydd_cate/add',
-      method: 'post',
-      data: data,
-    }).then((result) => {
-      console.log(result);
-      render()
-      form.reset()
-    })
-
-  })
-
-  // 删除模块
-  // 事件委托
-
-  tbody.addEventListener('click', e => {
-    if (e.target.classList.contains('layui-btn-danger')) {
-      const id = e.target.dataset.id
-      console.log('我要删除');
-      axios({
-        url: '/ydd_cate/del',
-        params: {
-          id
-        }
-      }).then(res => {
-        console.log(res);
-        render()
-      }).catch((err) => {
-
-      });
-
+      })
     }
 
-  })
+
+    render()
+    // 设置模态框
+    const modal = new bootstrap.Modal('#exampleModal', {
+      keyboard: false, // 按下 esc 不关闭
+      backdrop: 'static' // 点击遮罩层不关闭
+    })
+    const up = document.querySelector('.up');
+    const sort = document.querySelector('[name=sort_num]');
+    const decline = document.querySelector('.decline');
+
+    up.addEventListener('click', function () {
+
+
+      sort.value++
+
+    })
+    decline.addEventListener('click', function () {
+      if (sort.value > 0) {
+        sort.value--
+      }
+    })
+
+
+    // 2.添加模块
+    const title = document.querySelector('#title')
+    document.querySelector('.add').addEventListener('click', e => {
+      modal.show()
+      title.innerHTML = "添加分类"
+
+    })
+    const form = document.querySelector('form')
+
+    document.querySelector(".submit").addEventListener
+      ('click', e => {
+        console.log('我中文');
+        const data = serialize(form, { hash: true, empty: true })
+        console.log(data);
+        // data.sort_num = +data.sort_num
+        axios({
+          url: '/ydd_cate/add',
+          method: 'post',
+          data: data,
+        }).then((result) => {
+          console.log(result);
+          render()
+          form.reset()
+          modal.hide()
+        })
+
+      })
+
+    // 删除模块
+    // 事件委托
+
+    tbody.addEventListener('click', e => {
+      if (e.target.classList.contains('layui-btn-danger')) {
+        const id = e.target.dataset.id
+        console.log('我要删除');
+        axios({
+          url: '/ydd_cate/del',
+          params: {
+            id
+          }
+        }).then(res => {
+          console.log(res);
+          render()
+        }).catch((err) => {
+
+        });
+
+      }
+
+    })
 
 
 
@@ -181,6 +222,7 @@
 
 
 
-</script>
+  </script>
+</body>
 
 </html>

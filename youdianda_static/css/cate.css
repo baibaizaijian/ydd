@@ -1,0 +1,60 @@
+.alter {
+    display: flex;
+    justify-content: space-evenly
+}
+
+th {
+    font-size: 20px;
+    text-align: center;
+}
+
+td {
+    font-size: 18px;
+    text-align: center;
+    line-height: 200%;
+}
+
+.add {
+    margin: 20px;
+}
+
+.btn {
+    font-size: 18px;
+}
+
+.sorts {
+    display: flex;
+    align-items: center;
+}
+
+.container1 {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #dcdfe6;
+}
+
+.btn-x {
+    width: 40px;
+    height: 38px;
+    /* color: #fff; */
+    background-color: #f5f7fa;
+    text-align: center;
+    line-height: 38px;
+    border: none;
+    cursor: pointer;
+    border-left: 1px solid #dcdfe6;
+    border-right: 1px solid #dcdfe6;
+}
+
+.modal-body .x {
+    width: 100px;
+    height: 38px;
+    text-align: center;
+    line-height: 38px;
+    border: none;
+    background-color: #fff;
+    color: #333;
+}
