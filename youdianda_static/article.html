@@ -123,67 +123,69 @@
                       <option value="3">Hidden</option>
                     </select>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="demo">阅读次数:</label>
-                    <div class="input-group mb-3">
-                      <input type="text" class="form-control" id="demo" name="email">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="demo">阅读次数:</label>
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="demo" name="email">
+                      </div>
+
+                    </div>
+                    <div class="col-md-6">
+                      <label for="demo">创建时间:</label>
+                      <input type="date" class="form-control">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes"
+                          checked>
+                        <label class="form-check-label" for="mySwitch">是否推荐</label>
+                      </div>
+
+
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes"
+                          checked>
+                        <label class="form-check-label" for="mySwitch">是否置顶</label>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="demo">收藏数量:</label>
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="请输入收藏数量" id="demo" name="email">
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="demo">文章缩略图:</label>
+                      <input type="file" class="form-control ">
+
                     </div>
 
                   </div>
-                  <div class="col-md-6">
-                    <label for="demo">创建时间:</label>
-                    <input type="date" class="form-control">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
-                      <label class="form-check-label" for="mySwitch">是否推荐</label>
+
+
+                  <div class="custom-control custom-checkbox mb-3">
+                    <label for="demo">文章标签:</label>
+                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                    <label class="custom-control-label" for="customCheck1">Unchecked</label>
+
+                    <div>
+                      <label class="form-label">文章正文</label>
+                      <textarea class="form-control" rows="3"></textarea>
                     </div>
-
-
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
-                      <label class="form-check-label" for="mySwitch">是否置顶</label>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="demo">收藏数量:</label>
-                    <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="请输入收藏数量" id="demo" name="email">
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <label for="demo">文章缩略图:</label>
-                    <input type="file" class="form-control ">
-
-                  </div>
-
-                </div>
-
-
-                <div class="custom-control custom-checkbox mb-3">
-                  <label for="demo">文章标签:</label>
-                  <input type="checkbox" class="custom-control-input" id="customCheck1">
-                  <label class="custom-control-label" for="customCheck1">Unchecked</label>
-
-                  <div>
-                    <label class="form-label">文章正文</label>
-                    <textarea class="form-control" rows="3"></textarea>
-                  </div>
               </form>
             </div>
             <div class="modal-footer">
@@ -203,11 +205,15 @@
 <script src="./lib/axios.js"></script>
 <script src="./js/common.js"></script>
 <script src="../bootstrap/bootstrap.min.js"></script>
+<script src="./js/toasts.js"></script>
 
 
 <script>
-  // 文章渲染
+  // 获取元素
+  const form = document.querySelector('form')
   const tbody = document.querySelector('tbody')
+  let id
+  // 文章渲染
   async function render() {
     const res = await axios({ url: '/ydd_article/list' })
     console.log(res);
@@ -248,6 +254,31 @@
     backdrop: 'static' // 点击遮罩层不关闭
   })
   modal.show()
+  tbody.addEventListener('click', e => {
+
+    if (e.target.classList.contains('del')) {
+      id = e.target.dataset.id
+      console.log('我要删除');
+      axios({
+        url: '/ydd_article/del',
+        params: {
+          id
+        }
+      }).then(res => {
+        console.log(res);
+        render()
+        if (res.errmsg === "") {
+          Toast.success('删除成功')
+        } else {
+          Toast.info(`${res.errmsg}`)
+        }
+      })
+    }
+
+
+  })
+  //删除业务
+
 </script>
 
 </html>
