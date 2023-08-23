@@ -33,28 +33,7 @@
       onclick="location.reload()" title="刷新">
       <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
   </div>
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">添加标签</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">标签名称 :</label>
-              <input type="text" class="form-control" id="recipient-name">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-          <button type="button" class="btn btn-primary">提交</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
@@ -112,6 +91,44 @@
           </tr>
         </tbody>
       </table>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="title">添加分类</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- 表单区域 -->
+              <form>
+                <label for="demo">标题:</label>
+                <div class="input-group mb-3">
+                  <span class="input-group-text">@</span>
+                  <input type="text" class="form-control" placeholder="Username">
+                </div>
+                <label for="demo">作者:</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Email" id="demo" name="email">
+
+                </div>
+                <label for="demo">阅读次数:</label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Email" id="demo" name="email">
+
+                </div>
+
+
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+              <button type="button" class="btn btn-primary submit">提交</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -123,11 +140,47 @@
 
 <script>
   // 文章渲染
+  const tbody = document.querySelector('tbody')
   async function render() {
-    const res = await axios({ url: '/ydd_article/all' })
+    const res = await axios({ url: '/ydd_article/list' })
     console.log(res);
+    tbody.innerHTML = res.data.data.map(e => `
+    <tr class="info">
+            <td>${e.id}</td>
+            <td>${e.title}</td>
+            <td>${e.catename}</td>
+            <td><img src="http://124.223.14.236:8060/${e.pic}" alt=""></td>	
+            <td>${new Date(e.create_date).toLocaleString()}</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox"checked=${e.ishot === 0 ? 'checked=true' : ' '}>
+    <span class="slider round"></span>
+              </label >
+            </td >
+            <td>
+              <label class="switch">
+                <input type="checkbox" ${e.istop === 0 ? 'checked=true' : ' '}>
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <button type="button" class="btn btn-outline-primary">${e.status === 0 ? '待审核' : '已发布'}</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-gai">修改</button>
+              <button type="button" class="btn btn-danger">删除</button>
+            </td>
+          </tr >
+    ` ).join("")
   }
+
   render()
+  // 设置模态框
+  const modal = new bootstrap.Modal('#exampleModal', {
+    keyboard: false, // 按下 esc 不关闭
+    backdrop: 'static' // 点击遮罩层不关闭
+  })
+  modal.show()
 </script>
 
 </html>

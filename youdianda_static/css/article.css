@@ -93,6 +93,8 @@ body {
 /* 按钮样式 */
 td {
     position: relative;
+    font-size: 18px;
+    line-height: 100px;
 }
 
 .switch {
@@ -153,4 +155,9 @@ input:checked+.slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+img {
+    width: 100px;
+    height: 100px;
 }
