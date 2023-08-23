@@ -95,36 +95,103 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="title">添加分类</h1>
+              <h1 class="modal-title fs-5" id="title">添加文章</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <!-- 表单区域 -->
               <form>
+
                 <label for="demo">标题:</label>
-                <div class="input-group mb-3">
-                  <span class="input-group-text">@</span>
-                  <input type="text" class="form-control" placeholder="Username">
-                </div>
-                <label for="demo">作者:</label>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Email" id="demo" name="email">
-
-                </div>
-                <label for="demo">阅读次数:</label>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Email" id="demo" name="email">
-
+                <div class="input-group col-md-6">
+                  <span class="input-group-text">文章标题</span>
+                  <input type="text" class="form-control " placeholder="请输入标题名称">
                 </div>
 
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="author">作者：</label>
+                      <input type="email" class="form-control" id="author" placeholder="请输入作者">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="author">分类：</label>
+                    <select class="form-select">
+                      <option value="1" selected="">Private</option>
+                      <option value="2">Public</option>
+                      <option value="3">Hidden</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="demo">阅读次数:</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" id="demo" name="email">
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+                    <label for="demo">创建时间:</label>
+                    <input type="date" class="form-control">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
+                      <label class="form-check-label" for="mySwitch">是否推荐</label>
+                    </div>
 
 
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="mySwitch" name="darkmode" value="yes" checked>
+                      <label class="form-check-label" for="mySwitch">是否置顶</label>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="demo">收藏数量:</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="请输入收藏数量" id="demo" name="email">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="demo">文章缩略图:</label>
+                    <input type="file" class="form-control ">
+
+                  </div>
+
+                </div>
+
+
+                <div class="custom-control custom-checkbox mb-3">
+                  <label for="demo">文章标签:</label>
+                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <label class="custom-control-label" for="customCheck1">Unchecked</label>
+
+                  <div>
+                    <label class="form-label">文章正文</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                  </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
               <button type="button" class="btn btn-primary submit">提交</button>
             </div>
+
+
 
           </div>
         </div>
@@ -154,7 +221,7 @@
             <td>
               <label class="switch">
                 <input type="checkbox"checked=${e.ishot === 0 ? 'checked=true' : ' '}>
-    <span class="slider round"></span>
+                <span class="slider round"></span>
               </label >
             </td >
             <td>
@@ -167,8 +234,8 @@
               <button type="button" class="btn btn-outline-primary">${e.status === 0 ? '待审核' : '已发布'}</button>
             </td>
             <td>
-              <button type="button" class="btn btn-gai">修改</button>
-              <button type="button" class="btn btn-danger">删除</button>
+              <button type="button" class="btn btn-gai amend" data-id=${e.id}>修改</button>
+              <button type="button" class="btn btn-danger del" data-id=${e.id}>删除</button>
             </td>
           </tr >
     ` ).join("")
